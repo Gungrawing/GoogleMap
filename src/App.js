@@ -12,8 +12,6 @@ import "./App.css"
 
 const libraries = ['places'];
 
-
-
 export default function App() {
     const [isLat, setLat] = useState('')
     const [isLng, setLng] = useState('')
@@ -29,21 +27,13 @@ export default function App() {
     const options = {
         style: mapStyle
     }
-    useEffect(() => {
-        const handleUserKeyPress = event => {
-            const { key, keyCode } = event;
-            if (keyCode === 32 || (keyCode >= 65 && keyCode <= 90)) {
-                setZoom(isZoom => `${isZoom}${key}`);
-                event.preventDefault()
-            }
 
-        };
-        window.addEventListener("keydown", handleUserKeyPress);
-        return () => {
-            window.removeEventListener("keydown", handleUserKeyPress);
-        };
-    }, );
-
+    window.addEventListener('keydown', (e) =>{
+        if(e.key === 'Enter'){
+            setZoom(4)
+            getCenter()
+        }
+    })
 
     function getCenter(){
         setCenter({
@@ -75,11 +65,7 @@ export default function App() {
                    required
                    value={isLng}
                    onChange={(e)=>setLng(e.target.value)}/>
-            <input type="number"
-                   required
-                   onKeyDown={(e)=>setZoom(+e.target.value)}/>
         </div>
-        <button onClick={getCenter}>Click To Change Center</button>
     </h6>
     <GoogleMap
         mapContainerStyle={mapContainerStyle}
@@ -90,8 +76,3 @@ export default function App() {
 </div>
     );
 }
-// <input type="number"
-//        required
-//        onChange={(e)=>{window.addEventListener('keypress',()=>{
-//            setZoom(+e.target.value)
-//        })}}/>
