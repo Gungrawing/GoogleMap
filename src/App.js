@@ -30,7 +30,7 @@ export default function App() {
 
     window.addEventListener('keydown', (e) =>{
         if(e.key === 'Enter'){
-            setZoom(4)
+            setZoom(10)
             getCenter()
         }
     })
@@ -39,7 +39,6 @@ export default function App() {
         setCenter({
             lat:+isLat,
             lng:+isLng,
-            handleUserKeyPress: +isZoom,
         })
 
     }
